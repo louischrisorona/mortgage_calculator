@@ -7,3 +7,4 @@ made a simple mortgage payment calculator
 
 This drew me back to the foundation of algorithmic calculations
 
+barely any styling... let me know if you find bugs.
