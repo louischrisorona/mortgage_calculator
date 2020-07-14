@@ -1,0 +1,10 @@
+* {
+    margin: auto;
+    display: grid;
+}
+
+.mortgage-form {
+    width: 80%;
+    height: auto;
+    display: grid;
+}
