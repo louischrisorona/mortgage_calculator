@@ -1,10 +1,38 @@
 * {
     margin: auto;
-    display: grid;
+    padding: 1rem;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.mortgage-payment {
+    text-align: center;
 }
 
 .mortgage-form {
-    width: 80%;
-    height: auto;
+    width: 90%;
+    margin: 0 auto;
     display: grid;
+}
+
+table caption {
+    font-size: 3rem;
+}
+
+table {
+    display: grid;
+    width: 80vw;
+    grid-template-columns: minmax(200px, 2.33fr);
+}
+
+.table-body-schedule > tr > td {
+    align-content: space-between;
+    font-size: 1.25rem;
+}
+
+.table-body-schedule > tr > td#text {
+    justify-content: space-between;
 }

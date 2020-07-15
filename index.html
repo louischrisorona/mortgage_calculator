@@ -21,19 +21,23 @@
             </div>
         </div>
         <section>
-            <h2>Mortgage Payment</h2>
-            <p id="mortgage-payment">$----</p>
+            <h2 class="mortgage-payment">Mortgage Payment</h2>
+            <p class="mortgage-payment" id="mortgage-payment">$----</p>
         </section>
         <div class="amortized-table">
             <table id="amortization-schedule">
+                <caption>Mortgage Amortization Schedule</caption>
                 <thead>
                     <tr>
-                        <td>Month</td>
-                        <td>Principal</td>
-                        <td>Interest</td>
-                        <td>Mortgage Balance</td>
+                        <th scope="col">Month</th>
+                        <th scope="col">Principal</th>
+                        <th scope="col">Interest</th>
+                        <th scope="col">Mortgage Balance</th>
                     </tr>
                 </thead>
+                <tbody id="table-to-fill" class="table-body-schedule">
+                                       
+                </tbody>
             </table>
         </div>
     </main>
