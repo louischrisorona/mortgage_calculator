@@ -1,21 +1,29 @@
 let btn = document.querySelector('#submit')
+let form = document.querySelector('form.mortgage-group')
 
 btn.addEventListener('click', event => {
-    console.log('...started')
-    // event.preventDefault();
-    let pmt = calculatePayment();
-    
+    event.preventDefault()
+    mortgageMath()
+})
+
+form.addEventListener('submit', event => {
+    event.preventDefault()
+    mortgageMath()
+})
+
+const mortgageMath = () => {
+    let pmt = calculatePayment()
     let target = document.querySelector('#mortgage-payment')
     target.innerHTML = formatter.format(pmt)
-
-})
+    toggleTable()
+}
 
 const calculatePayment = () => {
     let principal = document.getElementById('principal').value
     if (typeof principal === "string") {
         principal = principal.replace(',','')
     }
-    let rate = document.getElementById('rate').value / 12 / 100  
+    let rate = document.getElementById('rate').value / 12 / 100
     let term = document.getElementById('term').value
     
     let a = Math.pow((1 + rate), term) //interest money cost factor
@@ -24,6 +32,7 @@ const calculatePayment = () => {
 
     let payment = principal * numerator / denominator
 
+    totalPaid(payment, term, principal)
     amortize(payment, rate, term, principal)
     
     return payment
@@ -37,35 +46,50 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 const amortize = (payment, rate, term, balance) => {
     let amortizationSchedule = []
-    for(let i = 0; i < term; i++) {
-        let interestPaydown = balance * rate / 12
+    for(let i = 0; i < term + 1; i++) {
+        let interestPaydown = balance * rate
         let principalPaydown = payment - interestPaydown
-        balance = balance - payment
+        balance -= principalPaydown
         if(balance > payment) {
-            amortizationSchedule.push([i, interestPaydown, principalPaydown, balance])
-        } else {
-            amortizationSchedule.push([i, 0, 0, balance])
+            amortizationSchedule.push([i, principalPaydown, interestPaydown, balance])
+        }
+        if(balance < 0) {
+            break
         }
     }
     createTable(amortizationSchedule)
 }
 
 const createTable = (array) => {
-    for(let i = 0; i < array.length - 1; i++){
-        let newRow = document.createElement('tr')
-        newRow.setAttribute('id', `row-${i}`)
-        let tableSchedule = document.getElementById('table-to-fill')
-        tableSchedule.appendChild(newRow)
-        
+    for(let i = 1; i < array.length - 1; i++) {
+        let table = document.getElementById('table-to-fill')
+        let row = table.insertRow()
         array[i].forEach((el, index) => {
-            let tableData = document.createElement('td')
-            tableData.setAttribute('id', `${el}-index`)
-            tableData.value = el
-            if(index == 0) {
-                newRow.append(tableData.value)
+            let cell = row.insertCell()
+            
+            if (index == 0) {
+                cell.innerHTML = el
             } else {
-                newRow.append(formatter.format(tableData.value))
+                cell.innerHTML = formatter.format(el)
             }
         })
     }
+}
+
+const toggleTable = () => {
+    let mortgageSchedule = document.querySelector('.table-body-schedule')
+    mortgageSchedule.style.visibility = 'visible'
+}
+
+const totalPaid = (payment, term, principal) => {
+    let totalPayment = document.querySelector('#mortgage-total')
+    let total = payment * term
+    totalPayment.innerHTML = `${formatter.format(total)}`
+    calculateInterest(total, principal)
+}
+
+const calculateInterest = (total, principal) => {
+    let totalInterest = document.querySelector('#interest-total')
+    let interest = total - principal
+    totalInterest.innerHTML = `${formatter.format(interest)}`
 }

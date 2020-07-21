@@ -10,7 +10,7 @@
     <main>
         <div class="mortgage-form">
             <h1>Mortgage Calculator</h1>
-            <div class="mortgage-group">
+            <form class="mortgage-group">
                 <label for="mortgage-principal">Mortgage Principal</label>
                 <input type="text" name="mortgage-principal" id="principal">
                 <label for="mortgage-interest">Interest Rate</label>
@@ -18,13 +18,18 @@
                 <label for="mortgage-term">Months</label>
                 <input type="number" name="mortgage-term" id="term">
                 <button id="submit" type="submit">Calculate</button>
-            </div>
+            </form>
         </div>
         <section>
-            <h2 class="mortgage-payment">Mortgage Payment</h2>
-            <p class="mortgage-payment" id="mortgage-payment">$----</p>
+            <h2 class="mortgage-info">Mortgage Payment</h2>
+            <p class="mortgage-info" id="mortgage-payment">$----</p>
+            <br>
+            <h2 class="mortgage-info">Total Paid</h2>
+            <p class="mortgage-info" id="mortgage-total"></p>
+            <h2 class="mortgage-info">Total Interest</h2>
+            <p class="mortgage-info" id="interest-total"></p>
         </section>
-        <div class="amortized-table">
+        <div class="table-body-schedule">
             <table id="amortization-schedule">
                 <caption>Mortgage Amortization Schedule</caption>
                 <thead>
@@ -35,7 +40,7 @@
                         <th scope="col">Mortgage Balance</th>
                     </tr>
                 </thead>
-                <tbody id="table-to-fill" class="table-body-schedule">
+                <tbody id="table-to-fill" class="table-body">
                                        
                 </tbody>
             </table>

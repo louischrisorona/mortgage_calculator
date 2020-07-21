@@ -8,7 +8,15 @@ body {
     height: 100vh;
 }
 
-.mortgage-payment {
+.amortized-table {
+    width: 85%;
+    margin: 2em auto;
+    background-color: gray;
+    display: grid;
+    grid-template-columns: repeat(4, 1.5fr);
+}
+
+.mortgage-info {
     text-align: center;
 }
 
@@ -18,21 +26,35 @@ body {
     display: grid;
 }
 
+.table-body-schedule {
+    visibility: hidden;
+    height: auto;
+    width: 60%;
+    border-radius: 5px;
+    background-color: grey;
+    border: 1px solid black;
+}
+
 table caption {
     font-size: 3rem;
 }
 
 table {
     display: grid;
-    width: 80vw;
+    font-size: 1.2em;
     grid-template-columns: minmax(200px, 2.33fr);
 }
 
 .table-body-schedule > tr > td {
+    margin: auto;
     align-content: space-between;
     font-size: 1.25rem;
 }
 
 .table-body-schedule > tr > td#text {
     justify-content: space-between;
+}
+
+#mortgage-payment {
+    font-size: 1.5em;
 }
